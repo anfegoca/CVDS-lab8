@@ -57,8 +57,8 @@ public class JDBCExample {
             System.out.println("-----------------------");
             
             
-            int suCodigoECI=20134423;
-            registrarNuevoProducto(con, suCodigoECI, "SU NOMBRE", 99999999);            
+            int suCodigoECI=2137885;
+            registrarNuevoProducto(con, suCodigoECI, "Gonzalez", 99999999);            
             con.commit();
                         
             
@@ -83,7 +83,13 @@ public class JDBCExample {
         //Crear preparedStatement
         //Asignar parámetros
         //usar 'execute'
-
+        String sql =  "INSERT INTO ORD_PRODUCTOS (codigo, nombre, precio) VALUES (?,?,?)";
+        
+        PreparedStatement sentencia =con.prepareStatement(sql);
+        sentencia.setString(1,String.valueOf(codigo));
+        sentencia.setString(2,nombre);
+        sentencia.setString(3,String.valueOf(precio));
+        sentencia.execute();
         
         con.commit();
         
@@ -105,10 +111,10 @@ public class JDBCExample {
         //Llenar la lista y retornarla
         
         String sql =  "SElECT nombre\n" +
-                        "FROM ORD_DETALLE_PEDIDO JOIN ORD_PRODUCTOS ON pedido_fk = codigo WHERE pedido_fk =" + codigoPedido+"\n";
+                        "FROM ORD_DETALLE_PEDIDO JOIN ORD_PRODUCTOS ON pedido_fk = codigo WHERE pedido_fk =?";
         
-                
-        PreparedStatement sentencia =con.prepareStatement(sql);        
+        PreparedStatement sentencia =con.prepareStatement(sql);
+        sentencia.setString(1,String.valueOf(codigoPedido));
         ResultSet rs = sentencia.executeQuery();
         
         while(rs.next()){
@@ -133,8 +139,9 @@ public class JDBCExample {
         //asignar parámetros
         //usar executeQuery
         //Sacar resultado del ResultSet
-        String sql = "SElECT SUM(cantidad*precio) FROM ORD_DETALLE_PEDIDO JOIN ORD_PRODUCTOS ON pedido_fk = codigo WHERE pedido_fk="+codigoPedido;
-        PreparedStatement sentencia =con.prepareStatement(sql);        
+        String sql = "SElECT SUM(cantidad*precio) FROM ORD_DETALLE_PEDIDO JOIN ORD_PRODUCTOS ON pedido_fk = codigo WHERE pedido_fk=?";
+        PreparedStatement sentencia =con.prepareStatement(sql);
+        sentencia.setString(1, String.valueOf(codigoPedido));
         ResultSet rs = sentencia.executeQuery();
         rs.next();
         int res = rs.getInt(1);
