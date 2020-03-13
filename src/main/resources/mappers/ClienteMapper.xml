@@ -5,7 +5,34 @@
   
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper">
     <select parameterType="map" id="consultarClientes" resultMap="ClienteResult">
-		select * from VI_CLIENTES
+		select
+    
+                c.nombre,
+                c.documento,
+                c.telefono,
+                c.direccion,
+                c.email,
+                c.vetado,
+
+                ir.id ,
+                ir.fechainiciorenta ,
+                ir.fechafinrenta ,
+
+                i.id ,
+                i.nombre ,
+                i.descripcion ,
+                i.fechalanzamiento ,
+                i.tarifaxdia ,
+                i.formatorenta ,
+                i.genero ,        
+                ti.id ,
+                ti.descripcion 
+
+
+                FROM VI_CLIENTES as c 
+                left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
+                left join VI_ITEMS as i on ir.ITEMS_id=i.id 
+                left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id 
     </select>
     <resultMap type='Cliente' id='ClienteResult'>
         <id property='documento' column='documento'/>
@@ -13,42 +40,9 @@
         <result property='direccion' column='direccion'/>  
         <result property='email' column='email'/>
         <result property='vetado' column='vetado'/>
-        <association property="rentados" javaType="ItemRentado"></association>   
+        <collection property='rentados' ofType='ItemRentado' resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemRentadoMapper.ItemRentadoResult' columnPrefix="ir_"></collection>
     </resultMap>
     
-    <select parameterType="map" id="consultarItemRentado" resultMap="ItemRentadoResult">
-		select * from VI_ITEMRENTADO
-    </select>
-    <resultMap type='ItemRentado' id='ItemRentadoResult'>
-        <id property='id' column='id'/>
-        <result property='item' column='COLUMNAS'/>
-        <association property="item" javaType="Item"></association>
-        <result property='fechainiciorenta' column='fechainiciorenta'/>
-        <result property='fechafinrenta' column='fechafinrenta'/>
-    </resultMap>
     
-    <select parameterType="map" id="consultarItems" resultMap="ItemsResult">
-		select * from VI_ITEMS
-    </select>
-    <resultMap type='Item' id='ItemResult'>
-        <id property='id' column='id'/>
-        <association property="tipo" javaType="TipoItem"></association>
-        <result property='nombre' column='nombre'/>
-        <result property='descripcion' column='descripcion'/>
-        <result property='fechaLanzamiento' column='fechaLanzamiento'/>
-        <result property='tarifaxDia' column='tarifaxDia'/>
-        <result property='formatoRenta' column='formatoRenta'/>
-        <result property='genero' column='genero'/>
-    </resultMap>
-    
-    <select parameterType="map" id="consultarTipoItem" resultMap="TipoItemResult">
-		select * from VI_TIPOITEM
-    </select>
-    <resultMap type='TipoItem' id='TipoItemResult'>
-        <id property='id' column='id'/>
-        <result property='descripcion' column='descripcion'/>
-    </resultMap>
-    
-
-          	
+     	
 </mapper>
