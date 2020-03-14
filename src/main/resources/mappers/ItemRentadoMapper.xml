@@ -11,5 +11,4 @@
         <result property='fechafinrenta' column='fechafinrenta'/>
         <association property="item" javaType="Item" columnPrefix="i_" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult"></association>
     </resultMap>
-
 </mapper>
