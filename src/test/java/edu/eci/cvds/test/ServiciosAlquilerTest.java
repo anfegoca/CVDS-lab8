@@ -45,8 +45,6 @@ public class ServiciosAlquilerTest {
             } catch(IndexOutOfBoundsException e) {
                 System.out.println("JOHANN ES RE GURRERO312");
                 r = true;
-            }catch(Exception e){
-                System.out.println("SHDH"+e);
             }
             // Validate no Client was found;
             System.out.println(r);

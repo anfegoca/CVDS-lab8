@@ -4,7 +4,6 @@ import edu.eci.cvds.samples.entities.Cliente;
 import edu.eci.cvds.samples.entities.Item;
 import edu.eci.cvds.samples.entities.ItemRentado;
 import edu.eci.cvds.samples.entities.TipoItem;
-import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.samples.services.ServiciosAlquiler;
 
 import java.io.Serializable;
@@ -26,7 +25,6 @@ public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
    private final Map<Integer,Item> itemsDisponibles;
    private final Map<Integer,ItemRentado> itemsrentados;
    private final Map<Integer,TipoItem> tipositems;
-   private String nombre="test";
    private final Map<Integer,Long> mapaPrestamosPorIdCliente;
 
    public ServiciosAlquilerItemsStub() {
@@ -35,11 +33,9 @@ public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
        itemsrentados = new HashMap<>();
        tipositems = new HashMap<>();
        mapaPrestamosPorIdCliente=new HashMap<>();
-       //poblar();
+       poblar();
    }
-   public String getName(){
-       return nombre;
-   }
+
    @Override
    public int valorMultaRetrasoxDia(int itemId) {
        return MULTA_DIARIA;
@@ -47,12 +43,14 @@ public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
 
    @Override
    public Cliente consultarCliente(long docu) throws ExcepcionServiciosAlquiler{
-       
+       Cliente c=null;
        if(clientes.containsKey(docu)){
-           return clientes.get(docu);
+           c=clientes.get(docu);
+           
        }else{
            throw new ExcepcionServiciosAlquiler("El cliente con documento "+docu+" no esta registrado.");
        }
+       return c;
        
    }
 

@@ -5,6 +5,7 @@ import com.google.inject.Singleton;
 import edu.eci.cvds.sampleprj.dao.ClienteDAO;
 import edu.eci.cvds.sampleprj.dao.ItemDAO;
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
+import edu.eci.cvds.sampleprj.dao.TipoItemDAO;
 
 import edu.eci.cvds.samples.entities.Cliente;
 import edu.eci.cvds.samples.entities.Item;
@@ -24,6 +25,8 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    private ItemDAO itemDAO;
    @Inject
    private ClienteDAO clienteDAO;
+   @Inject
+   private TipoItemDAO tipoItemDAO;
 
    @Override
    public int valorMultaRetrasoxDia(int itemId) {
@@ -70,7 +73,11 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    @Override
    public TipoItem consultarTipoItem(int id) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+       try {
+           return tipoItemDAO.load(id);
+       } catch (PersistenceException ex) {
+           throw new ExcepcionServiciosAlquiler("Error al consultar el tipo item "+id,ex);
+       }
    }
 
    @Override
