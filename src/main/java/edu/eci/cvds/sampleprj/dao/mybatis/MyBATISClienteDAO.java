@@ -22,6 +22,7 @@ public class MyBATISClienteDAO implements ClienteDAO{
       ClienteMapper.registrarCliente(cl);
   }
   catch(org.apache.ibatis.exceptions.PersistenceException e){
+      
       throw new PersistenceException("Error al registrar el cliente "+cl.toString(),e);
   }        
 
@@ -33,6 +34,7 @@ public class MyBATISClienteDAO implements ClienteDAO{
       return ClienteMapper.consultarCliente(doc);
   }
   catch(org.apache.ibatis.exceptions.PersistenceException e){
+      System.out.println("JOHANN ES RE GURRERO");
       throw new PersistenceException("Error al consultar el Cliente "+doc,e);
   }
 

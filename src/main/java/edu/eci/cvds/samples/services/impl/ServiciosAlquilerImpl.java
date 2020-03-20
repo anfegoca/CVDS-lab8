@@ -78,6 +78,7 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
        throw new UnsupportedOperationException("Not supported yet.");
    }
 
+
    @Override
    public void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler {
        throw new UnsupportedOperationException("Not supported yet.");

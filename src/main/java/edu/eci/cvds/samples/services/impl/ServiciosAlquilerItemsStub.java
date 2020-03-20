@@ -26,7 +26,7 @@ public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
    private final Map<Integer,Item> itemsDisponibles;
    private final Map<Integer,ItemRentado> itemsrentados;
    private final Map<Integer,TipoItem> tipositems;
-
+   private String nombre="test";
    private final Map<Integer,Long> mapaPrestamosPorIdCliente;
 
    public ServiciosAlquilerItemsStub() {
@@ -37,19 +37,23 @@ public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
        mapaPrestamosPorIdCliente=new HashMap<>();
        //poblar();
    }
-
+   public String getName(){
+       return nombre;
+   }
    @Override
    public int valorMultaRetrasoxDia(int itemId) {
        return MULTA_DIARIA;
    }
 
    @Override
-   public Cliente consultarCliente(long docu) throws ExcepcionServiciosAlquiler {
-       Cliente c=null;
+   public Cliente consultarCliente(long docu) throws ExcepcionServiciosAlquiler{
+       
        if(clientes.containsKey(docu)){
-           c=clientes.get(docu);
+           return clientes.get(docu);
+       }else{
+           throw new ExcepcionServiciosAlquiler("El cliente con documento "+docu+" no esta registrado.");
        }
-       return c;
+       
    }
 
    @Override
