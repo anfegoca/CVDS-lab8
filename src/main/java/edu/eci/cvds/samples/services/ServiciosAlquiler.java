@@ -51,6 +51,7 @@ public interface ServiciosAlquiler {
    public abstract List<TipoItem> consultarTiposItem() throws ExcepcionServiciosAlquiler;
 
    /**
+     * 
    * @obj rejistrar el alkiler de un item
    * @pre numdias >=1
    * @param date fecha de rejistro del alquiler
@@ -59,7 +60,7 @@ public interface ServiciosAlquiler {
    * @param numdias el numero de dias que se le prestara el item
    * @pos el item ya no debe estar disponible, y debe estar asignado al
    * cliente
-   * @throws ExcepcionXX si el identificador no corresponde con un item, o si
+   * @throws ExcepcionServiciosAlquiler si el identificador no corresponde con un item, o si
    * el mismo ya esta alquilado
    */
    public abstract void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler;
@@ -82,19 +83,5 @@ public interface ServiciosAlquiler {
    public abstract void registrarItem(Item i) throws ExcepcionServiciosAlquiler;
 
    public abstract void vetarCliente(long docu, boolean estado) throws ExcepcionServiciosAlquiler;
-
-    public static class ExcepcionServiciosAlquiler extends Exception {
-
-        public ExcepcionServiciosAlquiler() {
-        }
-
-        public ExcepcionServiciosAlquiler(String string, PersistenceException ex) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        public ExcepcionServiciosAlquiler(String string) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-    }
 
 }
