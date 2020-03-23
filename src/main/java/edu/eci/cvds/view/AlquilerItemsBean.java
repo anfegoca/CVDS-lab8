@@ -40,8 +40,8 @@ public class AlquilerItemsBean extends BasePageBean{
     
     
     public AlquilerItemsBean(){
-        serviciosAlquiler = ServiciosAlquilerFactory.getInstance().getServiciosAlquilerTesting();
-        
+        serviciosAlquiler = ServiciosAlquilerFactory.getInstance().getServiciosAlquiler();
+        System.out.println(serviciosAlquiler);
         try{
             clientes = serviciosAlquiler.consultarClientes();
             disponibles = serviciosAlquiler.consultarItemsDisponibles();

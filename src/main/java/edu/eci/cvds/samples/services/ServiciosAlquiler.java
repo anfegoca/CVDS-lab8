@@ -29,10 +29,11 @@ public interface ServiciosAlquiler {
    public abstract Item consultarItem(int id) throws ExcepcionServiciosAlquiler;
 
    /**
+     * @throws edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler
    * @obj consultar los items que estan disponibles para alquiler
    * @return el listado de items disponibles
    */
-   public abstract List<Item> consultarItemsDisponibles();
+   public abstract List<Item> consultarItemsDisponibles()throws ExcepcionServiciosAlquiler;
 
    /**
    * @obj consultar el valor de la multa del alquiler, dado el id del item

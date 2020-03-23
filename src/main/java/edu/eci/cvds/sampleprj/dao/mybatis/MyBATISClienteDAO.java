@@ -10,6 +10,7 @@ import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
 import edu.eci.cvds.samples.entities.Cliente;
 import edu.eci.cvds.samples.entities.TipoItem;
 import java.sql.SQLException;
+import java.util.List;
 
 public class MyBATISClienteDAO implements ClienteDAO{
 
@@ -34,11 +35,19 @@ public class MyBATISClienteDAO implements ClienteDAO{
       return ClienteMapper.consultarCliente(doc);
   }
   catch(org.apache.ibatis.exceptions.PersistenceException e){
-      System.out.println("JOHANN ES RE GURRERO");
       throw new PersistenceException("Error al consultar el Cliente "+doc,e);
   }
 
 
   }
+
+    @Override
+    public List<Cliente> consultarClientes() throws PersistenceException {
+        try{
+            return ClienteMapper.consultarClientes();
+        }catch(org.apache.ibatis.exceptions.PersistenceException e){
+             throw new PersistenceException("Error al consultar los Clientes ",e);
+        }
+    }
 
   }
