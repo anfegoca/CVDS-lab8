@@ -11,7 +11,7 @@
         <p:outputLabel value="Bienvenido a la Video Tienda"/>
         <h:form id="form1">
             <h:panelGrid columns="1">
-                <p:commandButton class="Button" value="Registrar Cliente" action="#{navigationController.paginaCliente()}"/>
+                <p:commandButton class="Button" value="Registrar Cliente" actionListener="#{Alquiler.inicio()}" action="#{navigationController.paginaCliente()}"/>
             </h:panelGrid>
         </h:form>
         </center>

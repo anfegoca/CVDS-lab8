@@ -39,15 +39,13 @@ public class AlquilerItemsBean extends BasePageBean{
     private long costo;
     
     
-    public AlquilerItemsBean(){
-        serviciosAlquiler = ServiciosAlquilerFactory.getInstance().getServiciosAlquiler();
-        System.out.println(serviciosAlquiler);
+    public void inicio(){
         try{
             clientes = serviciosAlquiler.consultarClientes();
-            disponibles = serviciosAlquiler.consultarItemsDisponibles();
-        }catch(ExcepcionServiciosAlquiler e){
             
+        }catch(ExcepcionServiciosAlquiler e){
         }
+        
     }
 
     public void registrarCliente(String nombre, long documento, String telefono, String direccion, String email){
@@ -71,9 +69,11 @@ public class AlquilerItemsBean extends BasePageBean{
     private void consultarMulta(){
         long total=0;
         try {
-            for(ItemRentado i: rentados){
+            if(rentados!=null){
                 
-                total+=serviciosAlquiler.consultarMultaAlquiler(i.getItem().getId(),new Date(System.currentTimeMillis()));
+                for(ItemRentado i: rentados){
+                    total+=serviciosAlquiler.consultarMultaAlquiler(i.getItem().getId(),new Date(System.currentTimeMillis()));
+                }
             }
         }catch (ExcepcionServiciosAlquiler ex) {
                 Logger.getLogger(AlquilerItemsBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -108,6 +108,11 @@ public class AlquilerItemsBean extends BasePageBean{
 
     public void setSeleccionado(Cliente seleccionado) {
         this.seleccionado = seleccionado;
+        try{
+        disponibles = serviciosAlquiler.consultarItemsDisponibles();
+        }catch(ExcepcionServiciosAlquiler ex){
+            
+        }
         consultarItemsRentados();
         consultarMulta();
     }

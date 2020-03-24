@@ -13,7 +13,7 @@
         <result property='tarifaxDia' column='tarifaxDia'/>
         <result property='formatoRenta' column='formatoRenta'/>
         <result property='genero' column='genero'/>
-        <association property="tipo" javaType="TipoItem" columnPrefix="ti_" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoItemMapper.TipoItemResult"></association>
+        <association property="tipo" javaType="TipoItem" columnPrefix='ti_' resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoItemMapper.TipoItemResult"></association>
     </resultMap>
     <insert id="insertarItem" parameterType="map">
         insert into VI_ITEMS (id,nombre,descripcion,fechalanzamiento,tarifaxdia,formatorenta,genero,TIPOITEM_id)
@@ -29,8 +29,8 @@
 	i.formatorenta,
 	i.genero,
 
-	ti.id,
-	ti.descripcion
+	ti.id as ti_id,
+	ti.descripcion as ti_descripcion
 	
 	FROM VI_ITEMS as i
 	left join VI_TIPOITEM as ti on i.TIPOITEM_id = ti.id 
@@ -45,8 +45,8 @@
 	i.formatorenta,
 	i.genero,
 
-	ti.id,
-	ti.descripcion
+	ti.id as ti_id,
+	ti.descripcion as ti_descripcion
 	
 	FROM VI_ITEMS as i
 	left join VI_TIPOITEM as ti on i.TIPOITEM_id = ti.id where i.id = #{itid}
@@ -61,16 +61,13 @@
             r.tarifaxdia,
             r.formatorenta,
             r.genero,
-            ti.id,
-            ti.descripcion
+            ti.id as ti_id,
+            ti.descripcion as ti_descripcion
 
            FROM VI_ITEMS AS r
            LEFT JOIN VI_TIPOITEM AS ti ON r.TIPOITEM_id=ti.id
-           JOIN 
-           (
-           SELECT i.id FROM VI_ITEMRENTADO AS ir
-           RIGHT JOIN VI_ITEMS as i ON ir.id=i.id
-           )AS b ON r.id=b.id
+      	  LEFT JOIN VI_ITEMRENTADO AS b ON r.id=b.ITEMS_id
+      	  WHERE b.ITEMS_id IS null
     </select>
     
     

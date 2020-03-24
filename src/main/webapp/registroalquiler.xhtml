@@ -30,6 +30,18 @@
                 <p:commandButton update="formAlquiler" class="Button" value="Alquilar" actionListener="#{Alquiler.rentarItem()}" action="#{navigationController.paginaCliente()}"/>
                 <p:outputLabel value="#{Alquiler.costo}"/>
             </h:panelGrid>
+            <p:dataTable value="#{Alquiler.disponibles}" var="dis">
+                <p:column headerText="Id">
+                    <p:outputLabel value="#{dis.id}"/>
+                </p:column>
+                <p:column headerText="Nombre">
+                    <p:outputLabel value="#{dis.nombre}"/>
+                </p:column>
+            </p:dataTable>
+            
+            <br><p:commandButton update="formAlquiler" class="Button" value="Volver" action="#{navigationController.paginaCliente()}"/></br>
+
+            
         </h:form>
         </center>
     </h:body>

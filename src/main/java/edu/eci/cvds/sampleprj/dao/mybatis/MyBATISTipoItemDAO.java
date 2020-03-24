@@ -10,6 +10,7 @@ import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.sampleprj.dao.TipoItemDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoItemMapper;
 import edu.eci.cvds.samples.entities.TipoItem;
+import java.util.List;
 
 /**
  *
@@ -38,6 +39,16 @@ public class MyBATISTipoItemDAO implements TipoItemDAO{
         }
         catch(org.apache.ibatis.exceptions.PersistenceException e){
             throw new PersistenceException("Error al consultar el Tipo item "+id,e);
+        }
+    }
+
+    @Override
+    public List<TipoItem> consultarTipos() throws PersistenceException {
+        try{
+            return tipoItemMapper.getTiposItems();
+        }
+        catch(org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al consultar el los tipos de item",e);
         }
     }
     
