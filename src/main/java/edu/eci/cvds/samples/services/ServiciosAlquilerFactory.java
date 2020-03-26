@@ -7,8 +7,6 @@ import edu.eci.cvds.sampleprj.dao.TipoItemDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISClienteDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISItemDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISTipoItemDAO;
-import org.apache.ibatis.transaction.TransactionFactory;
-import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.mybatis.guice.XMLMyBatisModule;
 
 import java.util.Optional;
@@ -21,7 +19,7 @@ import edu.eci.cvds.samples.services.impl.ServiciosAlquilerItemsStub;
 
 public class ServiciosAlquilerFactory {
 
-   private static ServiciosAlquilerFactory instance = new ServiciosAlquilerFactory();
+   private static final ServiciosAlquilerFactory instance = new ServiciosAlquilerFactory();
 
    private static Optional<Injector> optInjector;
 

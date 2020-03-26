@@ -18,9 +18,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Singleton
 public class ServiciosAlquilerImpl implements ServiciosAlquiler {

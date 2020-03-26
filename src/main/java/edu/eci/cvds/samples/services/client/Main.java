@@ -6,7 +6,6 @@
 package edu.eci.cvds.samples.services.client;
 
 import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
-import edu.eci.cvds.samples.services.ServiciosAlquiler;
 import edu.eci.cvds.samples.services.ServiciosAlquilerFactory;
 
 /**

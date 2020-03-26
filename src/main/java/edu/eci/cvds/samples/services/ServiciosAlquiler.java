@@ -1,11 +1,9 @@
 package edu.eci.cvds.samples.services;
 
-import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.Cliente;
 import edu.eci.cvds.samples.entities.Item;
 import edu.eci.cvds.samples.entities.ItemRentado;
 import edu.eci.cvds.samples.entities.TipoItem;
-import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
 import java.sql.Date;
 import java.util.List;
 

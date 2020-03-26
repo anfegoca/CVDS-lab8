@@ -1,21 +1,13 @@
 package edu.eci.cvds.test;
 
-import java.util.ArrayList;
-import java.util.List;
 //import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
 
 import com.google.inject.Inject;
-import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.Cliente;
 import edu.eci.cvds.samples.entities.Item;
-import edu.eci.cvds.samples.entities.ItemRentado;
-import edu.eci.cvds.samples.entities.TipoItem;
 import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.samples.services.ServiciosAlquiler;
 import edu.eci.cvds.samples.services.ServiciosAlquilerFactory;
-import edu.eci.cvds.samples.services.impl.ServiciosAlquilerImpl;
-import edu.eci.cvds.samples.services.impl.ServiciosAlquilerItemsStub;
-import org.apache.ibatis.session.SqlSession;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
@@ -23,7 +15,7 @@ import org.junit.Assert;
 public class ServiciosAlquilerTest {
 
     @Inject
-    private ServiciosAlquiler serviciosAlquiler;
+    private final ServiciosAlquiler serviciosAlquiler;
 
     public ServiciosAlquilerTest() {
         serviciosAlquiler = ServiciosAlquilerFactory.getInstance().getServiciosAlquilerTesting();
@@ -40,9 +32,7 @@ public class ServiciosAlquilerTest {
             boolean r = false;
             try {
                 Cliente cliente = serviciosAlquiler.consultarCliente(i);
-            } catch(ExcepcionServiciosAlquiler e) {
-                r = true;
-            } catch(IndexOutOfBoundsException e) {
+            } catch(ExcepcionServiciosAlquiler | IndexOutOfBoundsException e) {
                 r = true;
             }
             // Validate no Client was found;

@@ -21,11 +21,13 @@ import edu.eci.cvds.samples.services.impl.ServiciosAlquilerImpl;
 
 public class GuiceContextListener implements ServletContextListener {
 
+    @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
         ServletContext servletContext = servletContextEvent.getServletContext();
         servletContext.removeAttribute(Injector.class.getName());
     }
 
+    @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         Injector injector = Guice.createInjector(new XMLMyBatisModule() {
             @Override
